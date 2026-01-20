@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "react-router-v7-cloudflare-template",
   "compatibility_date": "2025-04-04",
+  "compatibility_flags": ["nodejs_compat"],
   "main": "./workers/app.ts",
   "keep_vars": true,
   "observability": {
@@ -11,7 +12,8 @@
     {
       "binding": "db",
       "database_name": "db",
-      "database_id": "6289d13f-8caa-4a35-a9ed-d448c949dead"
+      "database_id": "6289d13f-8caa-4a35-a9ed-d448c949dead",
+      "migrations_dir": "./app/db/migrations"
     }
   ]
 }

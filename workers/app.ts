@@ -1,6 +1,7 @@
 import { drizzle } from 'drizzle-orm/d1';
 import { createRequestHandler } from 'react-router';
 import * as schema from '../app/db/schema';
+import { createAuth } from '~/services/auth.server';
 
 declare module 'react-router' {
   export interface AppLoadContext {
@@ -9,6 +10,7 @@ declare module 'react-router' {
       ctx: ExecutionContext;
     };
     db: ReturnType<typeof drizzle>;
+    auth: ReturnType<typeof createAuth>;
   }
 }
 
@@ -16,8 +18,9 @@ const requestHandler = createRequestHandler(() => import('virtual:react-router/s
 
 const moreContext = ({ env }: { env: Env }) => {
   const db = drizzle(env.db, { schema });
+  const auth = createAuth(db);
 
-  return { db };
+  return { db, auth };
 };
 
 export default {
